@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gunawan & Chafifah Wedding</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+</head>
+<body class="lock-scroll">
+
+<!-- COVER OPENING -->
+<div id="cover">
+  <div class="cover-overlay"></div>
+  <div class="cover-content">
+    <div class="cover-top">
+      <p class="cover-subtitle">The Wedding Of</p>
+      <h1 class="cover-title">Iwan & Ifah</h1>
+    </div>
+    <div class="cover-bottom">
+      <p class="cover-text">Kepada Yth.</p>
+      <h2 class="guest-name" id="guestName">Tamu Undangan</h2>
+      <button id="openInvitation">Buka Undangan</button>
+      <small class="cover-note">
+        * Mohon maaf apabila ada kesalahan penulisan nama/gelar
+      </small>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div id="main-content"></div>
+<section class="hero">
+  <img src="ornamen/gold.svg" class="ornament ornament-top-left">
+  <img src="ornamen/kanan.svg" class="ornament ornament-top-right">
+  <img src="ornamen/gold.svg" class="ornament ornament-bottom-right">
+  <img src="ornamen/kiri.svg" class="ornament ornament-bottom-left">
+  <span class="hero-subtitle">The Wedding Of</span>
+  <div class="hero-divider"></div>
+  <h1 class="hero-name">Gunawan</h1>
+  <span class="hero-amp">&</span>
+  <h1 class="hero-name">Chafifah</h1>
+  <div class="countdown-wrapper">
+    <p class="hero-date">08 Juni 2026</p>
+    <div id="countdown"></div>
+  </div>
+</section>
+
+<!-- SALAM -->
+<section class="reveal">
+  <h2 class="section-title reveal-zoom">Salam</h2>
+  <div class="card greeting reveal-zoom">
+    <p class="greeting-arab">
+    اَلسَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
+  </p>
+  <p class="greeting-text">
+    Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud
+    mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara
+    pernikahan kami.
+  </p>
+  </div>
+</section>
+
+<!-- PROFILE CARD -->
+<section class="profile">
+  <h2 class="section-title">Mempelai</h2>
+  <div class="card profile-wrapper reveal-zoom">
+    <!-- PRIA -->
+    <div class="profile-card">
+      <div class="profile-photo">
+        <img src="img/iwan.jpg" alt="Gunawan">
+      </div>
+      <h3 class="profile-name">Gunawan</h3>
+      <p class="profile-desc">
+        Putra dari
+        <span>Bapak Parimin</span>
+        <span>&</span>
+        <span>Ibu Sukiyah</span>
+      </p>
+    </div>
+
+    <span class="profile-separator">&</span>
+
+    <!-- WANITA -->
+    <div class="profile-card">
+      <div class="profile-photo">
+        <img src="img/ifah.jpg" alt="Chafifah">
+      </div>
+      <h3 class="profile-name">Chafifah</h3>
+      <p class="profile-desc">
+        Putri dari
+        <span>Bapak Sobari (Alm)</span>
+        <span>&</span>
+        <span>Ibu Maniyah</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ACARA -->
+<section class="akad reveal">
+  <h2 class="section-title">Acara</h2>
+  <div class="card akad-card reveal-zoom">
+    <p>Kami bermaksud untuk menyelenggarakan pernikahan kami pada:</p>
+    <div class="akad-layout">
+      <div class="akad-side">
+        <div class="line"></div>
+        <p class="label">Senin</p>
+        <div class="line"></div>
+      </div>
+      <div class="akad-center">
+        <p class="month">JUNI</p>
+        <p class="date">08</p>
+        <p class="year">2026</p>
+      </div>
+      <div class="akad-side">
+        <div class="line"></div>
+        <p class="label">08.00 WIB</p>
+        <div class="line"></div>
+      </div>
+    </div>
+    <p class="akad-address">
+      Dukuh Kalimeneng, Desa Girigondo, Kec. Pituruh, Kab. Purworejo
+    </p>
+    <a class="button" href="https://maps.app.goo.gl/DvpVC3LbrgQKep187" target="_blank">Buka di Maps</a>
+  </div>
+</section>
+
+<!-- GALERI -->
+<section class="reveal">
+  <h2 class="section-title">Galeri</h2>
+  <div class="gallery reveal-zoom">
+    <img src="img/weding1.jpg" />
+    <img src="img/weding2.jpg" />
+    <img src="img/weding3.jpg" />
+    <img src="img/weding4.jpg" />
+    <img src="img/weding5.jpg" />
+    <img src="img/weding6.jpg" />
+  </div>
+</section>
+
+<!-- UCAPAN -->
+<section class="reveal">
+  <div class="reveal-zoom">
+    <h2 class="section-title">Ucapan</h2>
+    <form id="wishForm">
+      <input type="text" id="wishName" placeholder="Nama Anda"/>
+      <select>
+        <option>Hadir</option>
+        <option>Mungkin Hadir</option>
+        <option>Tidak Hadir</option>
+      </select>
+      <textarea placeholder="Tulis ucapan & doa..." rows="4" required></textarea>
+      <button class="button" type="submit">Kirim</button>
+      <small class="cover-note">* Mohon tunggu beberapa detik, ucapan segera ditampilkan.</small>
+    </form>
+    <div id="wishes" class="card reveal-zoom" style="margin-top:20px;"></div>
+    <div id="pagination" class="pagination reveal-zoom"></div>
+  </div>
+</section>
+<div id="thankYouPopup" class="popup">
+  <div class="popup-box">
+    <p>Terima kasih atas ucapan dan doanya 🤍</p>
+    <button id="closePopup">OK</button>
+  </div>
+</div>
+
+<!-- PENUTUP -->
+<section class="closing reveal">
+  <h2 class="section-title">Penutup</h2>
+  <div class="card reveal-zoom">
+    <p class="akad-top-text">
+    Kami berharap kehadiran Bapak/Ibu/Saudara/i dapat menjadi bagian
+    dari kebahagiaan kami. Terima kasih atas doa dan restu yang
+    diberikan untuk mengiringi langkah awal kami.
+  </p>
+  <p class="greeting-arab">
+    وَعَلَيْكُمُ السَّلاَمُ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
+  </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-social">
+    <a href="https://wa.me/6281238581413" target="_blank" aria-label="WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="https://instagram.com/one.iwann" target="_blank" aria-label="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+  </div>
+  <p>Develop by Iwan. All Right Reserved <small class="loading-icon">💖</small></p>
+</footer>
+
+<div id="lightbox">
+  <span id="lightboxClose">&times;</span>
+  <img id="lightboxImg" src="">
+</div>
+<script src="script.js"></script>
+</body>
+</html>
