@@ -72,7 +72,7 @@ h1, h2, h3 {
 #cover {
   position: fixed;
   inset: 0;
-  background: url('img/cover.png') center/cover no-repeat;
+  background: url('img/cover1.jpg') center/cover no-repeat;
   display: flex;
   justify-content: center;
   z-index: 9999;
