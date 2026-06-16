@@ -1,209 +1,355 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gunawan & Chafifah Wedding</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding — Gunawan & Chafifah</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 
-  <meta property="og:title" content="Gunawan & Chafifah Wedding Invitation" />
-  <meta property="og:description" content="Dengan penuh rasa syukur, kami mengundang Anda untuk hadir di hari bahagia kami." />
-  <meta property="og:image" content="https://oneiwann.github.io/wedding-iwan/img/ogtags.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:type" content="website" />
-  
+<meta property="og:title" content="Gunawan & Chafifah Wedding Invitation" />
+<meta property="og:description" content="Dengan penuh rasa syukur, kami mengundang Anda untuk hadir di hari bahagia kami." />
+<meta property="og:image" content="https://oneiwann.github.io/wedding-iwan/img/ogtags.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:type" content="website" />
+
 </head>
-<body class="lock-scroll">
+<body>
+  <audio id="bg-music" loop>
+    <source src="audio/audio.mp3" type="audio/mpeg">
+  </audio>
+  <button id="music-toggle" onclick="toggleMusic()">
+    🔊
+  </button>
 
-<!-- COVER OPENING -->
-<div id="cover">
-  <div class="cover-overlay"></div>
-  <div class="cover-content">
-    <div class="cover-top">
-      <p class="cover-subtitle">The Wedding Of</p>
-      <h1 class="cover-title">Iwan & Ifah</h1>
-    </div>
-    <div class="cover-bottom">
-      <p class="cover-text">Kepada Yth.</p>
-      <h2 class="guest-name" id="guestName">Tamu Undangan</h2>
-      <button id="openInvitation">Buka Undangan</button>
-      <small class="cover-note">
-        * Mohon maaf apabila ada kesalahan penulisan nama/gelar
-      </small>
-    </div>
-  </div>
-</div>
+  <!-- COVER -->
+  <div id="cover">
+    <!-- Corner ornaments -->
+    <svg class="cover-ornament top-left" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 10 Q50 10 50 50 Q50 10 90 10" stroke="var(--gold)" stroke-width="1" fill="none"/>
+      <path d="M10 10 Q10 50 50 50 Q10 50 10 90" stroke="var(--gold)" stroke-width="1" fill="none"/>
+      <circle cx="10" cy="10" r="3" fill="var(--gold)"/>
+      <path d="M30 10 Q50 10 50 30" stroke="var(--gold)" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <path d="M10 30 Q10 50 30 50" stroke="var(--gold)" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <path d="M50 50 Q80 50 80 80 Q80 50 110 50" stroke="var(--gold)" stroke-width="0.5" fill="none" opacity="0.3"/>
+      <path d="M50 50 Q50 80 80 80" stroke="var(--gold)" stroke-width="0.5" fill="none" opacity="0.3"/>
+    </svg>
 
-<!-- HERO -->
-<div id="main-content"></div>
-<section class="hero">
-  <img src="ornamen/gold.svg" class="ornament ornament-top-left">
-  <img src="ornamen/kanan.svg" class="ornament ornament-top-right">
-  <img src="ornamen/gold.svg" class="ornament ornament-bottom-right">
-  <img src="ornamen/kiri.svg" class="ornament ornament-bottom-left">
-  <span class="hero-subtitle">The Wedding Of</span>
-  <div class="hero-divider"></div>
-  <h1 class="hero-name">Gunawan</h1>
-  <span class="hero-amp">&</span>
-  <h1 class="hero-name">Chafifah</h1>
-  <div class="countdown-wrapper">
-    <p class="hero-date">08 Juni 2026</p>
-    <div id="countdown"></div>
-  </div>
-</section>
+    <svg class="cover-ornament top-right" viewBox="0 0 200 200" fill="none">
+      <path d="M10 10 Q50 10 50 50 Q50 10 90 10" stroke="var(--gold)" stroke-width="1"/>
+      <path d="M10 10 Q10 50 50 50 Q10 50 10 90" stroke="var(--gold)" stroke-width="1"/>
+      <circle cx="10" cy="10" r="3" fill="var(--gold)"/>
+      <path d="M30 10 Q50 10 50 30" stroke="var(--gold)" stroke-width="0.5" opacity="0.5"/>
+      <path d="M10 30 Q10 50 30 50" stroke="var(--gold)" stroke-width="0.5" opacity="0.5"/>
+    </svg>
 
-<!-- SALAM -->
-<section class="reveal">
-  <h2 class="section-title reveal-zoom">Salam</h2>
-  <div class="card greeting reveal-zoom">
-    <p class="greeting-arab">
-    اَلسَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
-  </p>
-  <p class="greeting-text">
-    Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud
-    mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara
-    pernikahan kami.
-  </p>
-  </div>
-</section>
+    <svg class="cover-ornament bottom-left" viewBox="0 0 200 200" fill="none">
+      <path d="M10 10 Q50 10 50 50 Q50 10 90 10" stroke="var(--gold)" stroke-width="1"/>
+      <path d="M10 10 Q10 50 50 50 Q10 50 10 90" stroke="var(--gold)" stroke-width="1"/>
+      <circle cx="10" cy="10" r="3" fill="var(--gold)"/>
+    </svg>
 
-<!-- PROFILE CARD -->
-<section class="profile">
-  <h2 class="section-title">Mempelai</h2>
-  <div class="card profile-wrapper reveal-zoom">
-    <!-- PRIA -->
-    <div class="profile-card">
-      <div class="profile-photo">
-        <img src="img/Iwan.jpg" alt="Gunawan">
-      </div>
-      <h3 class="profile-name">Gunawan</h3>
-      <p class="profile-desc">
-        Putra dari
-        <span>Bapak Parimin</span>
-        <span>&</span>
-        <span>Ibu Sukiyah</span>
-      </p>
+    <svg class="cover-ornament bottom-right" viewBox="0 0 200 200" fill="none">
+      <path d="M10 10 Q50 10 50 50 Q50 10 90 10" stroke="var(--gold)" stroke-width="1"/>
+      <path d="M10 10 Q10 50 50 50 Q10 50 10 90" stroke="var(--gold)" stroke-width="1"/>
+      <circle cx="10" cy="10" r="3" fill="var(--gold)"/>
+    </svg>
+
+    <p class="cover-label">THE WEDDING OF</p>
+
+    <div class="cover-names">
+      Gunawan
+      <span class="amp">&amp;</span>
+      Chafifah
     </div>
 
-    <span class="profile-separator">&</span>
+    <div class="cover-divider"></div>
 
-    <!-- WANITA -->
-    <div class="profile-card">
-      <div class="profile-photo">
-        <img src="img/Ifah.jpg" alt="Chafifah">
-      </div>
-      <h3 class="profile-name">Chafifah</h3>
-      <p class="profile-desc">
-        Putri dari
-        <span>Bapak Sobari (Alm)</span>
-        <span>&</span>
-        <span>Ibu Maniyah</span>
-      </p>
-    </div>
-  </div>
-</section>
+    <p class="cover-date">Kamis · 16 Juli 2026</p>
 
-<!-- ACARA -->
-<section class="akad reveal">
-  <h2 class="section-title">Acara</h2>
-  <div class="card akad-card reveal-zoom">
-    <p>Kami bermaksud untuk menyelenggarakan pernikahan kami pada:</p>
-    <div class="akad-layout">
-      <div class="akad-side">
-        <div class="line"></div>
-        <p class="label">Senin</p>
-        <div class="line"></div>
-      </div>
-      <div class="akad-center">
-        <p class="month">JUNI</p>
-        <p class="date">08</p>
-        <p class="year">2026</p>
-      </div>
-      <div class="akad-side">
-        <div class="line"></div>
-        <p class="label">08.00 WIB</p>
-        <div class="line"></div>
-      </div>
+    <div class="cover-to">
+      <p>Kepada Yth.</p>
+      <h2 id="guestName">Tamu Undangan</h2>
     </div>
-    <p class="akad-address">
-      Dukuh Kalimeneng, Desa Girigondo, Kec. Pituruh, Kab. Purworejo
+
+    <button class="open-btn" onclick="openInvitation()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+      </svg>
+      Buka Undangan
+    </button>
+
+    <p style="font-size:10px;color:rgba(159,195,230,0.4);margin-top:1rem;letter-spacing:1px;">
+      * Mohon maaf apabila ada kesalahan penulisan nama
     </p>
-    <a class="button" href="https://maps.app.goo.gl/DvpVC3LbrgQKep187" target="_blank">Buka di Maps</a>
   </div>
-</section>
 
-<!-- GALERI -->
-<section class="reveal">
-  <h2 class="section-title">Galeri</h2>
-  <div class="gallery reveal-zoom">
-    <img src="img/weding1.jpg" />
-    <img src="img/weding2.jpg" />
-    <img src="img/weding3.jpg" />
-    <img src="img/weding4.jpg" />
-    <img src="img/weding5.jpg" />
-    <img src="img/weding6.jpg" />
+<!-- MAIN CONTENT -->
+<div id="main">
+  <!-- HERO -->
+  <div id="hero">
+    <p class="cover-label reveal">Bismillahirrahmanirrahim</p>
+    <p class="hero-arabic reveal" style="transition-delay:0.1s">اَلسَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
+    <div class="gold-line reveal" style="transition-delay:0.2s"></div>
+    <p class="section-tag reveal" style="transition-delay:0.25s">The Wedding Of</p>
+    <div class="hero-names-big reveal" style="transition-delay:0.3s">
+      Gunawan
+      <span class="amp">&amp;</span>
+      Chafifah
+    </div>
+    <div class="gold-line reveal" style="transition-delay:0.4s"></div>
+    <p class="section-body reveal" style="transition-delay:0.5s;max-width:480px">
+      Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami.
+    </p>
   </div>
-</section>
 
-<!-- UCAPAN -->
-<section class="reveal">
-  <div class="reveal-zoom">
-    <h2 class="section-title">Ucapan</h2>
-    <form id="wishForm">
-      <input type="text" id="wishName" placeholder="Nama Anda"/>
-      <select>
-        <option>Hadir</option>
-        <option>Mungkin Hadir</option>
-        <option>Tidak Hadir</option>
-      </select>
-      <textarea placeholder="Tulis ucapan & doa..." rows="4" required></textarea>
-      <button class="button" type="submit">Kirim</button>
-      <small class="cover-note">* Mohon tunggu beberapa detik, ucapan segera ditampilkan.</small>
-    </form>
-    <div id="wishes" class="card reveal-zoom" style="margin-top:20px;"></div>
-    <div id="pagination" class="pagination reveal-zoom"></div>
-  </div>
-</section>
-<div id="thankYouPopup" class="popup">
-  <div class="popup-box">
-    <p>Terima kasih atas ucapan dan doanya 🤍</p>
-    <button id="closePopup">OK</button>
-  </div>
-</div>
+  <!-- COUPLE -->
+  <div id="couple">
+    <section>
+      <span class="section-tag reveal">Mempelai</span>
+      <h2 class="section-title reveal">Dua Jiwa, Satu Ikatan</h2>
+      <div class="gold-line reveal"></div>
 
-<!-- PENUTUP -->
-<section class="closing reveal">
-  <h2 class="section-title">Penutup</h2>
-  <div class="card reveal-zoom">
-    <p class="akad-top-text">
-    Kami berharap kehadiran Bapak/Ibu/Saudara/i dapat menjadi bagian
-    dari kebahagiaan kami. Terima kasih atas doa dan restu yang
-    diberikan untuk mengiringi langkah awal kami.
-  </p>
-  <p class="greeting-arab">
-    وَعَلَيْكُمُ السَّلاَمُ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
-  </p>
+      <div class="couple-grid reveal">
+        <div class="couple-card">
+          <div class="couple-img-wrap">
+            <div class="couple-img-placeholder">
+              <img src="img/iwan1.png" alt="iwan">
+            </div>
+          </div>
+          <p class="couple-name">Gunawan</p>
+          <div class="couple-parents">
+            <strong>Putra dari</strong>
+            Bapak Parimin<br>&amp; Ibu Sukiyah
+          </div>
+        </div>
+        <div class="couple-sep">&amp;</div>
+        <div class="couple-card">
+          <div class="couple-img-wrap">
+            <div class="couple-img-placeholder">
+              <img src="img/ifah1.png" alt="ifah">
+            </div>
+          </div>
+          <p class="couple-name">Chafifah</p>
+          <div class="couple-parents">
+            <strong>Putri dari</strong>
+            Bapak Sobari (Alm)<br>&amp; Ibu Maniyah
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-social">
-    <a href="https://wa.me/6281238581413" target="_blank" aria-label="WhatsApp">
-      <i class="fab fa-whatsapp"></i>
-    </a>
-    <a href="https://instagram.com/one.iwann" target="_blank" aria-label="Instagram">
-      <i class="fab fa-instagram"></i>
-    </a>
+  <!-- EVENT -->
+  <div id="event">
+    <section>
+      <span class="section-tag reveal">Acara</span>
+      <h2 class="section-title reveal">Detail Acara</h2>
+      <div class="gold-line reveal"></div>
+      <div class="event-wrapper reveal">
+        <!-- AKAD -->
+        <div class="event-side">
+          <h3 class="event-name">
+            Akad Nikah
+          </h3>
+          <div class="event-time">
+            08.00 WIB
+          </div>
+          <div class="event-location">
+            Dukuh Kalimeneng,<br>
+            Desa Girigondo,<br>
+            Kec. Pituruh,<br>
+            Kab. Purworejo
+          </div>
+        </div>
+        <!-- TANGGAL -->
+        <div class="event-center">
+          <div class="event-day">
+            KAMIS
+          </div>
+          <div class="event-number">
+            08
+          </div>
+          <div class="event-month">
+            JULI 2026
+          </div>
+        </div>
+
+        <!-- RESEPSI -->
+        <div class="event-side">
+          <h3 class="event-name">
+            Resepsi
+          </h3>
+          <div class="event-time">
+            10.00 WIB
+          </div>
+          <div class="event-location">
+            Dukuh Kalimeneng,<br>
+            Desa Girigondo,<br>
+            Kec. Pituruh,<br>
+            Kab. Purworejo
+          </div>
+        </div>
+      </div>
+      <a href="https://maps.app.goo.gl/DvpVC3LbrgQKep187"
+         target="_blank"
+         class="maps-btn">
+        Buka di Maps
+      </a>
+    </section>
   </div>
-  <p>Develop by Iwan. All Right Reserved <small class="loading-icon">💖</small></p>
-</footer>
 
-<div id="lightbox">
-  <span id="lightboxClose">&times;</span>
-  <img id="lightboxImg" src="">
+  <!-- COUNTDOWN -->
+  <div id="countdown">
+    <section>
+      <span class="section-tag reveal">Hitung Mundur</span>
+      <h2 class="section-title reveal">Menuju Hari Bahagia</h2>
+      <div class="gold-line reveal"></div>
+
+      <div class="count-grid reveal">
+        <div class="count-box">
+          <span class="count-num" id="cd-hari">--</span>
+          <span class="count-label">Hari</span>
+        </div>
+        <div class="count-box">
+          <span class="count-num" id="cd-jam">--</span>
+          <span class="count-label">Jam</span>
+        </div>
+        <div class="count-box">
+          <span class="count-num" id="cd-menit">--</span>
+          <span class="count-label">Menit</span>
+        </div>
+        <div class="count-box">
+          <span class="count-num" id="cd-detik">--</span>
+          <span class="count-label">Detik</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- GALLERY -->
+  <div id="gallery">
+    <section>
+      <span class="section-tag reveal">Galeri</span>
+      <h2 class="section-title reveal">Momen Bahagia Kami</h2>
+      <div class="gold-line reveal"></div>
+      <div class="gallery-grid reveal">
+        <div class="gallery-item">
+          <img
+            src="img/1-thumb.webp"
+            data-full="img/1-full.webp"
+            loading="lazy"
+            alt="Prewedding 1">
+        </div>
+        <div class="gallery-item">
+          <img
+            src="img/2-thumb.webp"
+            data-full="img/2-full.webp"
+            loading="lazy"
+            alt="Prewedding 2">
+        </div>
+        <div class="gallery-item">
+          <img
+            src="img/3-thumb.webp"
+            data-full="img/3-full.webp"
+            loading="lazy"
+            alt="Prewedding 3">
+        </div>
+        <div class="gallery-item">
+          <img
+            src="img/4-thumb.webp"
+            data-full="img/4-full.webp"
+            loading="lazy"
+            alt="Prewedding 4">
+        </div>
+        <div class="gallery-item">
+          <img
+            src="img/5-thumb.webp"
+            data-full="img/5-full.webp"
+            loading="lazy"
+            alt="Prewedding 5">
+        </div>
+        <div class="gallery-item">
+          <img
+            src="img/6-thumb.webp"
+            data-full="img/6-full.webp"
+            loading="lazy"
+            alt="Prewedding 6">
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox">
+    <button class="lightbox-close">&times;</button>
+    <img class="lightbox-image" src="" alt="">
+  </div>
+
+  <!-- WISHES -->
+  <div id="wishes">
+    <section>
+      <span class="section-tag reveal">Ucapan &amp; Doa</span>
+      <h2 class="section-title reveal">Kirim Ucapan</h2>
+      <div class="gold-line reveal"></div>
+
+      <div class="wish-form reveal">
+        <label>Nama</label>
+        <input type="text" id="wish-name" placeholder="Nama Anda">
+
+        <label>Ucapan &amp; Doa</label>
+        <textarea id="wish-msg" placeholder="Tulis ucapan dan doa terbaik Anda..."></textarea>
+
+        <label>Kehadiran</label>
+        <div class="attend-group" id="attend-group">
+          <button class="attend-btn active" onclick="setAttend(this,'Hadir')">Hadir</button>
+          <button class="attend-btn" onclick="setAttend(this,'Mungkin Hadir')">Mungkin Hadir</button>
+          <button class="attend-btn" onclick="setAttend(this,'Tidak Hadir')">Tidak Hadir</button>
+        </div>
+
+        <button class="submit-btn" onclick="submitWish()">Kirim Ucapan</button>
+      </div>
+      <p style="font-size:11px;color: red;margin-top:1rem;letter-spacing:1px;">* Mohon tunggu beberapa saat, ucapan akan segera ditampilkan.</p>
+
+      <div class="wishes-list" id="wishes-list"></div>
+      <div id="pagination" class="attend-group"></div>
+    </section>
+  </div>
+
+  <!-- CLOSING -->
+  <div id="closing">
+    <section>
+      <span class="section-tag reveal">Penutup</span>
+      <h2 class="section-title reveal">Terima Kasih</h2>
+      <div class="gold-line reveal"></div>
+      <p class="section-body reveal">
+        Kami berharap kehadiran Bapak/Ibu/Saudara/i dapat menjadi bagian dari kebahagiaan kami. Terima kasih atas doa dan restu yang diberikan untuk mengiringi langkah awal kami.
+      </p>
+      <p class="closing-arabic reveal" style="transition-delay:0.2s">وَعَلَيْكُمُ السَّلاَمُ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
+      <div class="gold-line reveal" style="transition-delay:0.3s"></div>
+      <div class="cover-names reveal" style="transition-delay:0.4s;font-size:2rem;color:var(--gold-light)">
+        Gunawan <span style="font-style:italic;color:var(--gold);font-size:0.6em;margin:0 8px">&amp;</span> Chafifah
+      </div>
+    </section>
+  </div>
+
+  <div class="footer-credit">
+    Developed by Iwan · Made with ❤️
+  </div>
+
+</div><!-- end #main -->
+<div class="lightbox">
+
+  <button class="lightbox-close" aria-label="Tutup">
+    &times;
+  </button>
+
+  <img
+    class="lightbox-image"
+    src=""
+    alt="">
+
 </div>
 <script src="script.js"></script>
 </body>
