@@ -4,12 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wedding — Gunawan & Chafifah</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 
-<meta property="og:title" content="Gunawan & Chafifah Wedding Invitation" />
+<meta property="og:title" content="Gunawan &amp; Chafifah Wedding Invitation" />
 <meta property="og:description" content="Dengan penuh rasa syukur, kami mengundang Anda untuk hadir di hari bahagia kami." />
-<meta property="og:image" content="https://oneiwann.github.io/wedding-iwan/img/ogg.webp" />
+<meta property="og:image" content="https://oneiwann.github.io/wedding-iwan/img/ogtags.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:type" content="website" />
@@ -17,56 +19,23 @@
 </head>
 <body>
   <audio id="bg-music" loop>
-    <source src="audio/Yovie & Nuno - Janji Suci (Video Clip).mp3" type="audio/mpeg">
+    <source src="audio/audio.mp3" type="audio/mpeg">
   </audio>
   <button id="music-toggle" onclick="toggleMusic()">
-    🔊
+    <span class="eq"><span></span><span></span><span></span></span>
   </button>
 
   <!-- COVER -->
   <div id="cover">
-    <!-- Corner ornaments -->
-    <svg class="cover-ornament top-left" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 10 Q50 10 50 50 Q50 10 90 10" stroke="var(--gold)" stroke-width="1" fill="none"/>
-      <path d="M10 10 Q10 50 50 50 Q10 50 10 90" stroke="var(--gold)" stroke-width="1" fill="none"/>
-      <circle cx="10" cy="10" r="3" fill="var(--gold)"/>
-      <path d="M30 10 Q50 10 50 30" stroke="var(--gold)" stroke-width="0.5" fill="none" opacity="0.5"/>
-      <path d="M10 30 Q10 50 30 50" stroke="var(--gold)" stroke-width="0.5" fill="none" opacity="0.5"/>
-      <path d="M50 50 Q80 50 80 80 Q80 50 110 50" stroke="var(--gold)" stroke-width="0.5" fill="none" opacity="0.3"/>
-      <path d="M50 50 Q50 80 80 80" stroke="var(--gold)" stroke-width="0.5" fill="none" opacity="0.3"/>
-    </svg>
+    <span class="corner corner-tl"></span>
+    <span class="corner corner-tr"></span>
+    <span class="corner corner-bl"></span>
+    <span class="corner corner-br"></span>
 
-    <svg class="cover-ornament top-right" viewBox="0 0 200 200" fill="none">
-      <path d="M10 10 Q50 10 50 50 Q50 10 90 10" stroke="var(--gold)" stroke-width="1"/>
-      <path d="M10 10 Q10 50 50 50 Q10 50 10 90" stroke="var(--gold)" stroke-width="1"/>
-      <circle cx="10" cy="10" r="3" fill="var(--gold)"/>
-      <path d="M30 10 Q50 10 50 30" stroke="var(--gold)" stroke-width="0.5" opacity="0.5"/>
-      <path d="M10 30 Q10 50 30 50" stroke="var(--gold)" stroke-width="0.5" opacity="0.5"/>
-    </svg>
-
-    <svg class="cover-ornament bottom-left" viewBox="0 0 200 200" fill="none">
-      <path d="M10 10 Q50 10 50 50 Q50 10 90 10" stroke="var(--gold)" stroke-width="1"/>
-      <path d="M10 10 Q10 50 50 50 Q10 50 10 90" stroke="var(--gold)" stroke-width="1"/>
-      <circle cx="10" cy="10" r="3" fill="var(--gold)"/>
-    </svg>
-
-    <svg class="cover-ornament bottom-right" viewBox="0 0 200 200" fill="none">
-      <path d="M10 10 Q50 10 50 50 Q50 10 90 10" stroke="var(--gold)" stroke-width="1"/>
-      <path d="M10 10 Q10 50 50 50 Q10 50 10 90" stroke="var(--gold)" stroke-width="1"/>
-      <circle cx="10" cy="10" r="3" fill="var(--gold)"/>
-    </svg>
-
-    <p class="cover-label">THE WEDDING OF</p>
-
-    <div class="cover-names">
-      Gunawan
-      <span class="amp">&amp;</span>
-      Chafifah
-    </div>
-
+    <p class="cover-label">The Wedding Of</p>
+    <div class="cover-names">Gunawan <span class="amp">&amp;</span> Chafifah</div>
     <div class="cover-divider"></div>
-
-    <p class="cover-date">Kamis · 16 Juli 2026</p>
+    <p class="cover-date">Senin, 19 Oktober 2026</p>
 
     <div class="cover-to">
       <p>Kepada Yth.</p>
@@ -74,35 +43,42 @@
     </div>
 
     <button class="open-btn" onclick="openInvitation()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
       </svg>
       Buka Undangan
     </button>
 
-    <p class="cover-note">
-      * Mohon maaf apabila ada kesalahan penulisan nama
-    </p>
+    <p class="cover-note">* Mohon maaf apabila ada kesalahan penulisan nama</p>
   </div>
 
 <!-- MAIN CONTENT -->
 <div id="main">
   <!-- HERO -->
-  <div id="hero">
-    <p class="cover-label reveal">Bismillahirrahmanirrahim</p>
-    <p class="hero-arabic reveal" style="transition-delay:0.1s">اَلسَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
-    <div class="gold-line reveal" style="transition-delay:0.2s"></div>
-    <p class="section-tag reveal" style="transition-delay:0.25s">The Wedding Of</p>
-    <div class="hero-names-big reveal" style="transition-delay:0.3s">
-      Gunawan
-      <span class="amp">&amp;</span>
-      Chafifah
-    </div>
-    <div class="gold-line reveal" style="transition-delay:0.4s"></div>
-    <p class="section-body reveal" style="transition-delay:0.5s;max-width:480px">
-      Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami.
-    </p>
-  </div>
+    <div id="hero">
+        <div class="hero-photo-wrap">
+          <img class="hero-photo" src="img/1.jpg" alt="" onerror="this.style.display='none'">
+        </div>
+        <div class="hero-veil"></div>
+        <span class="dust" style="left:8%;animation-delay:0s;--dx:8px;"></span>
+        <span class="dust" style="left:22%;animation-delay:1.4s;--dx:-10px;"></span>
+        <span class="dust" style="left:38%;animation-delay:2.8s;--dx:14px;"></span>
+        <span class="dust" style="left:55%;animation-delay:.6s;--dx:-6px;"></span>
+        <span class="dust" style="left:68%;animation-delay:3.6s;--dx:10px;"></span>
+        <span class="dust" style="left:80%;animation-delay:2s;--dx:-12px;"></span>
+        <span class="dust" style="left:92%;animation-delay:4.2s;--dx:6px;"></span>
+
+        <div class="hero-content">
+          <p class="cover-label">Bismillahirrahmanirrahim</p>
+          <p class="hero-arabic reveal" style="transition-delay:.1s">اَلسَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
+          <div class="gold-line reveal" style="transition-delay:.2s"></div>
+          <div class="hero-names-big reveal" style="transition-delay:.3s">Gunawan <span class="amp">&amp;</span> Chafifah</div>
+          <p class="section-body reveal" style="transition-delay:.45s;max-width:300px;color:var(--ivory-dim)">
+            Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri pernikahan kami.
+          </p>
+          <div class="scroll-cue reveal" style="transition-delay:.6s"></div>
+        </div>
+      </div>
 
   <!-- COUPLE -->
   <div id="couple">
@@ -115,7 +91,7 @@
         <div class="couple-card">
           <div class="couple-img-wrap">
             <div class="couple-img-placeholder">
-              <img src="img/iwan1.webp" alt="iwan">
+              <img src="img/iwan1.png" alt="iwan">
             </div>
           </div>
           <p class="couple-name">Gunawan</p>
@@ -128,7 +104,7 @@
         <div class="couple-card">
           <div class="couple-img-wrap">
             <div class="couple-img-placeholder">
-              <img src="img/ifah1.webp" alt="ifah">
+              <img src="img/ifah1.png" alt="ifah">
             </div>
           </div>
           <p class="couple-name">Chafifah</p>
@@ -150,53 +126,40 @@
       <div class="event-wrapper reveal">
         <!-- AKAD -->
         <div class="event-side">
-          <h3 class="event-name">
-            Akad Nikah
-          </h3>
-          <div class="event-time">
-            08.00 WIB
-          </div>
-          <div class="event-location">
-            Dukuh Kalimeneng,<br>
-            Desa Girigondo,<br>
-            Kec. Pituruh,<br>
-            Kab. Purworejo
-          </div>
+          <h3 class="event-name">Akad Nikah</h3>
+          <div class="event-time">08.00 WIB</div>
         </div>
         <!-- TANGGAL -->
         <div class="event-center">
-          <div class="event-day">
-            KAMIS
-          </div>
-          <div class="event-number">
-            08
-          </div>
-          <div class="event-month">
-            JULI 2026
-          </div>
+          <div class="event-day">SENIN</div>
+          <div class="event-number">19</div>
+          <div class="event-month">OKTOBER 2026</div>
         </div>
-
         <!-- RESEPSI -->
         <div class="event-side">
-          <h3 class="event-name">
-            Resepsi
-          </h3>
-          <div class="event-time">
-            10.00 WIB
-          </div>
-          <div class="event-location">
-            Dukuh Kalimeneng,<br>
-            Desa Girigondo,<br>
-            Kec. Pituruh,<br>
-            Kab. Purworejo
-          </div>
+          <h3 class="event-name">Resepsi</h3>
+          <div class="event-time">10.00 WIB</div>
         </div>
       </div>
-      <a href="https://maps.app.goo.gl/DvpVC3LbrgQKep187"
-         target="_blank"
-         class="maps-btn">
-        Buka di Maps
-      </a>
+
+      <div class="event-location-shared reveal">
+        <div class="location-divider"><span></span></div>
+        <div class="location-label">Lokasi Acara</div>
+        <div class="location-text">
+          Dukuh Kalimeneng, Desa Girigondo,<br>
+          Kec. Pituruh, Kab. Purworejo
+        </div>
+      </div>
+      <div class="btn-row reveal">
+        <a href="https://maps.app.goo.gl/DvpVC3LbrgQKep187" target="_blank" class="maps-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M19.5 10.5c0 7.5-7.5 11.25-7.5 11.25S4.5 18 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+          Buka di Maps
+        </a>
+        <button class="btn-outline" onclick="addToCalendar()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0V11.25A2.25 2.25 0 015.25 9h13.5a2.25 2.25 0 012.25 2.25v7.5"/></svg>
+          Tambah ke Kalender
+        </button>
+      </div>
     </section>
   </div>
 
@@ -288,34 +251,28 @@
   </div>
 
   <!-- WISHES -->
-  <div id="wishes">
-    <section>
-      <span class="section-tag reveal">Ucapan &amp; Doa</span>
-      <h2 class="section-title reveal">Kirim Ucapan</h2>
-      <div class="gold-line reveal"></div>
+  <div id="wishes"><section>
+    <span class="section-tag reveal">Ucapan &amp; Doa</span>
+    <h2 class="section-title reveal">Kirim Ucapan</h2>
+    <div class="gold-line reveal"></div>
 
-      <div class="wish-form reveal">
-        <label>Nama</label>
-        <input type="text" id="wish-name" placeholder="Nama Anda">
-
-        <label>Ucapan &amp; Doa</label>
-        <textarea id="wish-msg" placeholder="Tulis ucapan dan doa terbaik Anda..."></textarea>
-
-        <label>Kehadiran</label>
-        <div class="attend-group" id="attend-group">
-          <button class="attend-btn active" onclick="setAttend(this,'Hadir')">Hadir</button>
-          <button class="attend-btn" onclick="setAttend(this,'Mungkin Hadir')">Mungkin Hadir</button>
-          <button class="attend-btn" onclick="setAttend(this,'Tidak Hadir')">Tidak Hadir</button>
-        </div>
-
-        <button class="submit-btn" onclick="submitWish()">Kirim Ucapan</button>
+    <div class="wish-form reveal">
+      <label>Nama</label>
+      <input type="text" id="wish-name" placeholder="Nama Anda">
+      <label>Ucapan &amp; Doa</label>
+      <textarea id="wish-msg" placeholder="Tulis ucapan dan doa terbaik Anda..."></textarea>
+      <label>Kehadiran</label>
+      <div class="attend-group" id="attend-group">
+        <button class="attend-btn active" onclick="setAttend(this,'Hadir')">Hadir</button>
+        <button class="attend-btn" onclick="setAttend(this,'Mungkin Hadir')">Mungkin</button>
+        <button class="attend-btn" onclick="setAttend(this,'Tidak Hadir')">Tidak Hadir</button>
       </div>
-      <p style="font-size:11px;color: red;margin-top:1rem;letter-spacing:1px;">* Mohon tunggu beberapa saat, ucapan akan segera ditampilkan.</p>
+      <button class="submit-btn" onclick="submitWish()">Kirim Ucapan</button>
+    </div>
 
-      <div class="wishes-list" id="wishes-list"></div>
-      <div id="pagination" class="attend-group"></div>
-    </section>
-  </div>
+    <div class="wishes-list reveal" id="wishes-list"></div>
+    <div id="pagination" class="attend-group reveal"></div>
+  </section></div>
 
   <!-- CLOSING -->
   <div id="closing">
@@ -333,11 +290,10 @@
       </div>
     </section>
   </div>
-
   <div class="footer-credit">
     Developed by Iwan · Made with <span class="heartbeat">❤️</span>
   </div>
-
+  <div id="toast"></div>
 </div><!-- end #main -->
 <div class="lightbox">
 
