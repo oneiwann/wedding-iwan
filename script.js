@@ -2,400 +2,356 @@
 // CONFIG
 // ======================
 const API_URL = 'https://script.google.com/macros/s/AKfycbxmGwYHyeO7zBDXW4YoBWHYBneN8N9BxMW2PwiFdp_3vvouqLO04RoQY-L7cA3-fY57gQ/exec';
-const LIMIT = 5;
-const galleryImages = document.querySelectorAll('.gallery-item img');
-const lightbox = document.querySelector('.lightbox');
-const lightboxImage = document.querySelector('.lightbox-image');
-const closeBtn = document.querySelector('.lightbox-close');
+const PER_PAGE = 5;
+
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
+
+const lightbox = $('.lightbox');
+const lightboxImage = $('.lightbox-image');
 
 let attendValue = 'Hadir';
-let comments = [];
+let wishes = [];
 let currentPage = 1;
 
-// ======================
-// INIT (HALAMAN DIBUKA)
-// ======================
 document.addEventListener('DOMContentLoaded', () => {
+  setupGallery();
+  setupLightbox();
+  setupGuestName();
   loadComments();
 });
 
 // ======================
-// TOMBOL BUKA UNDANGAN
+// BUKA UNDANGAN
 // ======================
 function openInvitation() {
-  document.getElementById('cover').style.display = 'none';
-  
-  const main = document.getElementById('main');
-  main.classList.add('visible');
+  $('#cover').style.display = 'none';
+  $('#main').classList.add('visible');
 
   initReveal();
   startCountdown();
+  playMusic();
 
-  const music = document.getElementById('bg-music');
-
-  // mulai dari volume kecil
-  music.volume = 0;
-  
-  music.play().then(() => {
-    fadeInMusic(music);
-  }).catch(err => {
-    console.log("Autoplay diblok:", err);
-  });
-
-  // munculin tombol
-  document.getElementById('music-toggle').classList.add('show');
-
+  $('#music-toggle').classList.add('show');
   window.scrollTo(0, 0);
 }
 
-function fadeInMusic(audio) {
-  let volume = 0;
-  const target = 0.5; // max volume (0 - 1)
-  const step = 0.02;
+function playMusic() {
+  const music = $('#bg-music');
+  music.volume = 0;
 
+  music.play()
+    .then(() => fadeInMusic(music))
+    .catch(err => console.log('Autoplay diblok:', err));
+}
+
+function fadeInMusic(audio, target = 0.5, step = 0.02) {
   const interval = setInterval(() => {
-    if (volume < target) {
-      volume += step;
-      audio.volume = volume;
-    } else {
-      clearInterval(interval);
-    }
+    audio.volume = Math.min(target, audio.volume + step);
+    if (audio.volume >= target) clearInterval(interval);
   }, 200);
 }
 
-function toggleMusic() {
-  const music = document.getElementById('bg-music');
-  const btn = document.getElementById('music-toggle');
-
-  music.muted = !music.muted;
-
-  btn.textContent = music.muted ? "🔇" : "🔊";
+function toggleMusic(){
+  const audio = $('#bg-music'), btn = $('#music-toggle');
+  if(audio.paused){ audio.play().catch(()=>{}); btn.classList.remove('music-paused'); }
+  else{ audio.pause(); btn.classList.add('music-paused'); }
 }
 
 function initReveal() {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  $$('.reveal').forEach(el => observer.observe(el));
+}
 
 // ======================
 // AUTO NAMA DARI URL
 // ======================
-const params = new URLSearchParams(window.location.search);
-const guest = params.get('to');
-const guestNameEl = document.getElementById('guestName');
-const guestLabelEl = document.getElementById('guestLabel');
-const nameInput = document.getElementById('wish-name');
-
 function capitalizeWords(str) {
-  return str
-  .toLowerCase()
-  .split(' ')
-  .filter(Boolean)
-  .map(w => w[0].toUpperCase() + w.slice(1))
-  .join(' ');
+  return str.toLowerCase()
+    .split(' ')
+    .filter(Boolean)
+    .map(w => w[0].toUpperCase() + w.slice(1))
+    .join(' ');
 }
 
-let formattedName = 'Tamu Undangan';
+function setupGuestName() {
+  const guest = new URLSearchParams(window.location.search).get('to');
+  const name = guest
+    ? capitalizeWords(decodeURIComponent(guest).replace(/\+/g, ' ').trim())
+    : 'Tamu Undangan';
 
-if (guest) {
-  formattedName = capitalizeWords(
-    decodeURIComponent(guest).replace(/\+/g, ' ').trim()
-    );
+  const nameEl = $('#guestName');
+  const labelEl = $('#guestLabel');
+  const inputEl = $('#wish-name');
+
+  if (nameEl) nameEl.textContent = name;
+  if (labelEl) labelEl.innerHTML = `Kepada Yth.<br>${name}`;
+  if (inputEl) inputEl.value = name;
 }
-
-if (guestNameEl) guestNameEl.textContent = formattedName;
-if (guestLabelEl) guestLabelEl.innerHTML = `Kepada Yth.<br>${formattedName}`;
-if (nameInput) nameInput.value = formattedName;
 
 // ======================
 // HITUNGAN MUNDUR
 // ======================
 function startCountdown() {
-    const target = new Date('2026-08-10T08:00:00+07:00');
-    function update() {
-      const now = new Date();
-      const diff = target - now;
-      if (diff <= 0) {
-        document.getElementById('cd-hari').textContent = '0';
-        document.getElementById('cd-jam').textContent = '0';
-        document.getElementById('cd-menit').textContent = '0';
-        document.getElementById('cd-detik').textContent = '0';
-        return;
-      }
-      const d = Math.floor(diff / 86400000);
-      const h = Math.floor((diff % 86400000) / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      document.getElementById('cd-hari').textContent = String(d).padStart(2,'0');
-      document.getElementById('cd-jam').textContent = String(h).padStart(2,'0');
-      document.getElementById('cd-menit').textContent = String(m).padStart(2,'0');
-      document.getElementById('cd-detik').textContent = String(s).padStart(2,'0');
+  const target = new Date('2026-10-19T08:00:00+07:00');
+  const units = [
+    ['cd-hari', 86400000],
+    ['cd-jam', 3600000],
+    ['cd-menit', 60000],
+    ['cd-detik', 1000]
+  ];
+
+  function update() {
+    const diff = target - new Date();
+
+    if (diff <= 0) {
+      units.forEach(([id]) => $(`#${id}`).textContent = '0');
+      return;
     }
-    update();
-    setInterval(update, 1000);
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+
+    $('#cd-hari').textContent = String(d).padStart(2, '0');
+    $('#cd-jam').textContent = String(h).padStart(2, '0');
+    $('#cd-menit').textContent = String(m).padStart(2, '0');
+    $('#cd-detik').textContent = String(s).padStart(2, '0');
   }
 
-  // ======================
-  // Zoom Galery
-  // ======================
-  galleryImages.forEach(img => {
+  update();
+  setInterval(update, 1000);
+}
 
-    /* buka lightbox */
+// ======================
+// GALERI & LIGHTBOX
+// ======================
+function setupGallery() {
+  $$('.gallery-item img').forEach(img => {
     img.addEventListener('click', () => {
       lightboxImage.src = img.dataset.full;
       lightbox.classList.add('show');
       document.body.style.overflow = 'hidden';
     });
 
-    /* preload saat hover desktop */
     img.addEventListener('mouseenter', () => {
-      const preload = new Image();
-      preload.src = img.dataset.full;
+      new Image().src = img.dataset.full;
     });
   });
+}
 
-  function closeLightbox(){
+function setupLightbox() {
+  const closeLightbox = () => {
     lightbox.classList.remove('show');
     document.body.style.overflow = '';
-    setTimeout(() => {
-      lightboxImage.src = '';
-    }, 300);
-  }
+    setTimeout(() => lightboxImage.src = '', 300);
+  };
 
-  closeBtn.addEventListener('click', closeLightbox);
+  $('.lightbox-close').addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', (e) => {
-    if(e.target === lightbox){
-      closeLightbox();
-    }
+    if (e.target === lightbox) closeLightbox();
   });
-
   document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape'){
-      closeLightbox();
-    }
+    if (e.key === 'Escape') closeLightbox();
   });
+}
 
 // ======================
-// PILIH KEHADIRAN
+// KEHADIRAN
 // ======================
 function setAttend(el, val) {
-  document.querySelectorAll('.attend-btn').forEach(b => b.classList.remove('active'));
+  $$('.attend-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   attendValue = val;
 }
-
 
 // ======================
 // SUBMIT UCAPAN
 // ======================
 function submitWish() {
-  const name = document.getElementById('wish-name').value.trim();
-  const msg = document.getElementById('wish-msg').value.trim();
-
+  const name = $('#wish-name').value.trim();
+  const msg = $('#wish-msg').value.trim();
+ 
   if (!name || !msg) {
-    alert('Mohon isi nama dan ucapan terlebih dahulu.');
+    toast('Mohon isi nama dan ucapan terlebih dahulu.');
     return;
   }
-
+ 
+  const btn = $('.submit-btn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Mengirim...'; }
+ 
+  const payload = { nama: name, hadir: attendValue, ucapan: msg };
+ 
   fetch(API_URL, {
     method: 'POST',
-    body: JSON.stringify({
-      nama: name,
-      hadir: attendValue,
-      ucapan: msg
+    body: JSON.stringify(payload)
+  })
+    .then(() => {
+      // optimistic update: langsung tampilkan tanpa menunggu Google Sheet
+      wishes.unshift({ ...payload, waktu: new Date().toISOString() });
+      currentPage = 1;
+      renderWishes();
+ 
+      $('#wish-name').value = '';
+      $('#wish-msg').value = '';
+      toast('Terima kasih atas ucapan & doanya 🤍');
     })
-  })
-  .then(() => {
-    document.getElementById('wish-name').value = '';
-    document.getElementById('wish-msg').value = '';
-
-    // reload data + balik ke page 1
-    currentPage = 1;
-    loadComments();
-  })
-  .catch(err => console.error(err));
+    .catch(err => {
+      console.error(err);
+      toast('Gagal mengirim, coba lagi ya 🙏');
+    })
+    .finally(() => {
+      if (btn) { btn.disabled = false; btn.textContent = 'Kirim'; }
+    });
 }
 
-
 // ======================
-// LOAD DATA DARI SHEET
+// LOAD & RENDER DATA
 // ======================
 function loadComments() {
   fetch(API_URL)
     .then(res => res.json())
     .then(data => {
-
-      // handle format API
-      if (Array.isArray(data)) {
-        comments = data;
-      } else if (data.data) {
-        comments = data.data;
-      } else {
-        comments = [];
-      }
-
-      // sort terbaru di atas
-      comments.sort((a, b) => {
-        return new Date(b.waktu || 0) - new Date(a.waktu || 0);
-      });
-
-      renderComments();
-      renderPagination();
+      wishes = Array.isArray(data) ? data : (data.data || []);
+      wishes.sort((a, b) => new Date(b.waktu || 0) - new Date(a.waktu || 0));
+      renderWishes();
     })
-    .catch(err => console.error('Gagal load komentar:', err));
+    .catch(err => console.error('Gagal load data:', err));
 }
 
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('id-ID', {
+    day: '2-digit', month: 'short', year: 'numeric',
+    hour: '2-digit', minute: '2-digit'
+  });
+}
 
-// ======================
-// RENDER KOMENTAR
-// ======================
-function formatTime(dateStr) {
-    const d = new Date(dateStr);
-    return d.toLocaleDateString('id-ID', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+function escapeHTML(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function renderWishes() {
+  const list = $('#wishes-list');
+  const pag = $('#pagination');
+  if (!list || !pag) return;
+
+  if (wishes.length === 0) {
+    list.innerHTML = `<p class="wishes-empty">Belum ada ucapan. Jadilah yang pertama mengirimkan doa restu 🤍</p>`;
+    pag.innerHTML = '';
+    return;
   }
 
-function renderComments() {
-  const list = document.getElementById('wishes-list');
-  if (!list) return;
+  const totalPages = Math.ceil(wishes.length / PER_PAGE);
+  currentPage = Math.min(currentPage, totalPages);
 
-  list.innerHTML = '';
+  const start = (currentPage - 1) * PER_PAGE;
+  const pageItems = wishes.slice(start, start + PER_PAGE);
 
-  const start = (currentPage - 1) * LIMIT;
-  const end = start + LIMIT;
+  list.innerHTML = pageItems.map(item => {
+    const nama = item.nama || '';
+    const ucapan = item.ucapan || '';
+    const hadir = item.hadir || 'Hadir';
 
-  comments.slice(start, end).forEach(item => {
-    const div = document.createElement('div');
-    div.className = 'wish-item';
+    const initials = nama.trim().split(/\s+/).slice(0, 2)
+      .map(w => w.charAt(0)).join('').toUpperCase();
 
-    div.innerHTML = `
-      <div class="wish-item-header">
-        <span class="wish-item-name">${item.nama}</span>
-        <span class="wish-item-attend">${item.hadir}</span>
-      </div>
-      <p class="wish-item-msg">"${item.ucapan}"</p>
-      <div class="comment-time">
-          ${item.waktu ? formatTime(item.waktu) : ''}
+    const badgeClass = hadir === 'Hadir' ? 'hadir'
+      : hadir === 'Tidak Hadir' ? 'tidak' : 'mungkin';
+
+    return `
+      <div class="wish-card">
+        <div class="wish-head">
+          <div class="wish-avatar">${initials}</div>
+          <div class="wish-meta">
+            <div class="wish-name">${escapeHTML(nama)}</div>
+            <div class="wish-time">${formatDate(item.waktu)}</div>
+          </div>
+          <span class="wish-badge ${badgeClass}">${escapeHTML(hadir)}</span>
+        </div>
+        <p class="wish-msg">${escapeHTML(ucapan)}</p>
       </div>
     `;
+  }).join('');
 
-    list.appendChild(div);
-  });
+  renderPagination(totalPages);
 }
 
-// ======================
-// PAGINATION
-// ======================
-function renderPagination() {
-  const pagination = document.getElementById('pagination');
-  if (!pagination) return;
-
+function renderPagination(totalPages) {
+  const pagination = $('#pagination');
   pagination.innerHTML = '';
-
-  const totalPages = Math.ceil(comments.length / LIMIT);
   if (totalPages <= 1) return;
 
-  const maxVisible = 5;
-  let start = Math.max(1, currentPage - 4);
-  let end = Math.min(totalPages, start + maxVisible - 1);
-
-  // biar tetap 5 tombol kalau di akhir
-  if (end - start < maxVisible - 1) {
-    start = Math.max(1, end - maxVisible + 1);
-  }
-
-  // tombol pertama + ...
-  if (start > 1) {
-    addPageButton(1);
-
-    if (start > 2) {
-      addDots();
-    }
-  }
-
-  // tombol tengah
-  for (let i = start; i <= end; i++) {
-    addPageButton(i);
-  }
-
-  // ... + tombol terakhir
-  if (end < totalPages) {
-    if (end < totalPages - 1) {
-      addDots();
-    }
-
-    addPageButton(totalPages);
-  }
-
-  // helper
-  function addPageButton(page) {
+  const makeBtn = (label, disabled, onClick) => {
     const btn = document.createElement('button');
-    btn.textContent = page;
-
-    if (page === currentPage) {
-      btn.classList.add('active');
+    btn.innerHTML = label;
+    btn.className = 'attend-btn';
+    if (disabled) {
+      btn.disabled = true;
+      btn.style.opacity = '.35';
     }
+    btn.addEventListener('click', onClick);
+    return btn;
+  };
 
-    btn.addEventListener('click', () => {
-      currentPage = page;
-      renderComments();
-      renderPagination();
-    });
+  const goToPage = () => {
+    renderWishes();
+    $('#wishes')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
-    pagination.appendChild(btn);
-  }
+  pagination.appendChild(makeBtn('‹', currentPage === 1, () => { currentPage--; goToPage(); }));
 
-  function addDots() {
-    const span = document.createElement('span');
-    span.textContent = '...';
-    span.style.padding = '0 8px';
-    pagination.appendChild(span);
-  }
+  const info = document.createElement('span');
+  info.innerHTML = `Hal ${currentPage} / ${totalPages}`;
+  pagination.appendChild(info);
 
-  // PREV
-if (currentPage > 1) {
-  const prev = document.createElement('button');
-  prev.textContent = '←';
-  prev.addEventListener('click', () => {
-    currentPage--;
-    renderComments();
-    renderPagination();
-  });
-  pagination.appendChild(prev);
+  pagination.appendChild(makeBtn('›', currentPage === totalPages, () => { currentPage++; goToPage(); }));
 }
 
-// NEXT
-if (currentPage < totalPages) {
-  const next = document.createElement('button');
-  next.textContent = '→';
-  next.addEventListener('click', () => {
-    currentPage++;
-    renderComments();
-    renderPagination();
-  });
-  pagination.appendChild(next);
+/* ============================================================
+   TOAST NOTIFICATION
+   ============================================================ */
+function toast(msg) {
+  const t = $('#toast');
+  t.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>' + msg + '</span>';
+  t.classList.add('show');
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-btn.addEventListener('click', () => {
-  currentPage = page;
-  renderComments();
-  renderPagination();
-
-  window.scrollTo({
-    top: document.getElementById('wishes').offsetTop,
-    behavior: 'smooth'
-  });
-});
+/* ============================================================
+   ADD TO CALENDAR (.ics)
+   ============================================================ */
+function addToCalendar() {
+  const ics = [
+    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Undangan Gunawan Chafifah//ID',
+    'BEGIN:VEVENT',
+    'DTSTART:20261019T010000Z',
+    'DTEND:20261019T050000Z',
+    'SUMMARY:Akad & Resepsi Pernikahan Gunawan & Chafifah',
+    'LOCATION:Dukuh Kalimeneng, Desa Girigondo, Kec. Pituruh, Kab. Purworejo',
+    'DESCRIPTION:Akad Nikah 08.00 WIB, Resepsi 10.00 WIB',
+    'END:VEVENT', 'END:VCALENDAR'
+  ].join('\r\n');
+ 
+  const blob = new Blob([ics], { type: 'text/calendar' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'Undangan-Gunawan-Chafifah.ics';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+ 
+  toast('Acara ditambahkan, cek file kalender 📅');
 }
