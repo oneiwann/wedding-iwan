@@ -25,39 +25,60 @@ document.addEventListener('DOMContentLoaded', () => {
 // BUKA UNDANGAN
 // ======================
 function openInvitation() {
+  const overlay = $('#envelope-overlay');
+  const letterImage = $('#letter-image');
+  overlay.classList.add('show');
+ 
+    // trigger animasi buka amplop
+    requestAnimationFrame(() => {
+      letterImage.classList.add('open');
+    });
+   
+    setTimeout(() => {
+      overlay.classList.add('fade');
+    }, 1000);
+   
+    setTimeout(() => {
+      overlay.classList.remove('show', 'fade');
+      letterImage.classList.remove('open');
+      revealMainContent();
+    }, 2000);
+  }
+ 
+function revealMainContent() {
   $('#cover').style.display = 'none';
   $('#main').classList.add('visible');
-
+ 
   initReveal();
   startCountdown();
   playMusic();
-
+ 
   $('#music-toggle').classList.add('show');
   window.scrollTo(0, 0);
 }
-
+ 
 function playMusic() {
   const music = $('#bg-music');
   music.volume = 0;
-
+ 
   music.play()
     .then(() => fadeInMusic(music))
     .catch(err => console.log('Autoplay diblok:', err));
 }
-
+ 
 function fadeInMusic(audio, target = 0.5, step = 0.02) {
   const interval = setInterval(() => {
     audio.volume = Math.min(target, audio.volume + step);
     if (audio.volume >= target) clearInterval(interval);
   }, 200);
 }
-
+ 
 function toggleMusic(){
   const audio = $('#bg-music'), btn = $('#music-toggle');
   if(audio.paused){ audio.play().catch(()=>{}); btn.classList.remove('music-paused'); }
   else{ audio.pause(); btn.classList.add('music-paused'); }
 }
-
+ 
 function initReveal() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -67,7 +88,7 @@ function initReveal() {
       }
     });
   }, { threshold: 0.15 });
-
+ 
   $$('.reveal').forEach(el => observer.observe(el));
 }
 
