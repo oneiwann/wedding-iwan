@@ -122,7 +122,7 @@ function setupGuestName() {
 // HITUNGAN MUNDUR
 // ======================
 function startCountdown() {
-  const target = new Date('2026-10-19T08:00:00+07:00');
+  const target = new Date('2026-09-14T08:00:00+07:00');
   const units = [
     ['cd-hari', 86400000],
     ['cd-jam', 3600000],
@@ -358,8 +358,8 @@ function addToCalendar() {
   const ics = [
     'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Undangan Gunawan Chafifah//ID',
     'BEGIN:VEVENT',
-    'DTSTART:20261019T010000Z',
-    'DTEND:20261019T050000Z',
+    'DTSTART:20260914T010000Z',
+    'DTEND:20260914T050000Z',
     'SUMMARY:Akad & Resepsi Pernikahan Gunawan & Chafifah',
     'LOCATION:Dukuh Kalimeneng, Desa Girigondo, Kec. Pituruh, Kab. Purworejo',
     'DESCRIPTION:Akad Nikah 08.00 WIB, Resepsi 10.00 WIB',
