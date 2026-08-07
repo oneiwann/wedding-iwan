@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupLightbox();
   setupGuestName();
   loadComments();
+  initFireflies('#fireflies', 15);
 });
 
 // ======================
@@ -375,4 +376,109 @@ function addToCalendar() {
   a.remove();
  
   toast('Acara ditambahkan, cek file kalender 📅');
+}
+
+// ======================
+// FIREFLIES (full JS control)
+// ======================
+let fireflyState = [];
+let fireflyRAF = null;
+
+function initFireflies(containerSelector = '#fireflies', count = 15) {
+  const ul = $(containerSelector);
+  if (!ul) return;
+
+  const rand = (min, max) => min + Math.random() * (max - min);
+
+  fireflyState = Array.from({ length: count }).map(() => {
+    const li = document.createElement('li');
+    li.className = 'firefly';
+    ul.appendChild(li);
+
+    return {
+      el: li,
+      x: rand(0, 100),
+      y: rand(0, 100),
+      angle: rand(0, Math.PI * 2),   // arah gerak sekarang (radian)
+      turnSpeed: rand(0.1, 0.5),     // seberapa cepat arahnya berubah/berbelok
+      speed: rand(1, 4),             // kecepatan gerak (% layar per detik)
+      baseSize: rand(3, 6),
+      sizeAmp: rand(0, 1),
+      sizePhase: rand(0, Math.PI * 2),
+      sizeFreq: rand(0, 1),
+      blinkPhase: rand(0, Math.PI * 2),
+      blinkFreq: rand(0, 0.8),
+      blinkMin: rand(0.05, 0.2),
+      blinkMax: rand(0.7, 10),
+      entered: false,
+      entranceDelay: rand(0, 2500)
+    };
+  });
+
+  startFireflyClock();
+  animateFireflies();
+}
+
+function startFireflyClock() {
+  fireflyState.forEach(f => {
+    setTimeout(() => {
+      f.entered = true;
+      f.el.style.transition = 'opacity 1.2s ease, transform 1.2s ease';
+    }, f.entranceDelay);
+  });
+}
+
+function animateFireflies() {
+  let last = performance.now();
+
+  function tick(now) {
+    const dt = Math.min((now - last) / 1000, 0.1); // dibatasi biar gak loncat kalau tab sempat freeze
+    last = now;
+    const t = now / 1000;
+
+    fireflyState.forEach(f => {
+      if (!f.entered) return;
+
+      // --- belokkan arah secara acak & halus tiap frame ---
+      const wobble = (Math.random() - 0.5) * f.turnSpeed * dt * 4;
+      f.angle += wobble;
+
+      // kadang naikkan/turunkan kecepatan juga, biar makin variatif
+      f.speed += (Math.random() - 0.5) * dt * 3;
+      f.speed = Math.max(1, Math.min(f.speed, 20));
+
+      // gerak sesuai arah & kecepatan saat ini
+      f.x += Math.cos(f.angle) * f.speed * dt;
+      f.y += Math.sin(f.angle) * f.speed * dt;
+
+      // --- pantulkan balik kalau kena tepi, biar gak kabur keluar layar ---
+      if (f.x < 0) { f.x = 0; f.angle = Math.PI - f.angle; }
+      if (f.x > 100) { f.x = 100; f.angle = Math.PI - f.angle; }
+      if (f.y < 0) { f.y = 0; f.angle = -f.angle; }
+      if (f.y > 100) { f.y = 100; f.angle = -f.angle; }
+
+      // --- ukuran "bernapas" ---
+      const sizeFactor = 1 + f.sizeAmp * Math.sin(t * f.sizeFreq + f.sizePhase);
+      const size = Math.max(2, f.baseSize * sizeFactor);
+
+      // --- kedip ---
+      const blink = (Math.sin(t * f.blinkFreq + f.blinkPhase) + 1) / 2;
+      const opacity = f.blinkMin + blink * (f.blinkMax - f.blinkMin);
+
+      f.el.style.left = f.x + '%';
+      f.el.style.top = f.y + '%';
+      f.el.style.width = size + 'px';
+      f.el.style.height = size + 'px';
+      f.el.style.opacity = opacity;
+      f.el.style.transform = 'scale(1)';
+    });
+
+    fireflyRAF = requestAnimationFrame(tick);
+  }
+
+  fireflyRAF = requestAnimationFrame(tick);
+}
+
+function stopFireflies() {
+  if (fireflyRAF) cancelAnimationFrame(fireflyRAF);
 }
