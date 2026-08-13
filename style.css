@@ -668,7 +668,7 @@
   .wish-badge.mungkin{background:#7A6940;color:var(--gold-light);}
   .wish-badge.tidak{background:#6B4046;color:var(--gold-light);}
   .wish-msg{font-size:var(--font-size);color:var(--ivory);line-height:1.6;}
-  .wishes-empty{text-align:center;color:var(--ivory-dim);font-size:.85rem;padding:1.5rem 0;font-style:italic;font-family:var(--font-display);}
+  .wishes-empty{text-align:center;color:var(--ivory);font-size:var(--font-size);padding:1.5rem 0;font-style:italic;font-family:var(--font-display);}
 
   #pagination{max-width:300px;margin:1.4rem auto 0;}
   #pagination .attend-btn{flex:0 0 auto;min-width:auto;padding:0 1rem;}
