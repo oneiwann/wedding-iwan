@@ -122,20 +122,27 @@ function setupGuestName() {
 // ======================
 // HITUNGAN MUNDUR
 // ======================
+let countdownInterval = null;
+
 function startCountdown() {
   const target = new Date('2026-09-14T08:00:00+07:00');
-  const units = [
-    ['cd-hari', 86400000],
-    ['cd-jam', 3600000],
-    ['cd-menit', 60000],
-    ['cd-detik', 1000]
-  ];
+  const units = ['cd-hari', 'cd-jam', 'cd-menit', 'cd-detik'];
 
   function update() {
     const diff = target - new Date();
 
     if (diff <= 0) {
-      units.forEach(([id]) => $(`#${id}`).textContent = '0');
+      units.forEach(id => {
+        const el = $(`#${id}`);
+        if (el) el.textContent = '00';
+      });
+
+      const numbersEl = $('#cd-numbers');
+      const messageEl = $('#cd-message');
+      if (numbersEl) numbersEl.style.display = 'none';
+      if (messageEl) messageEl.style.display = 'block';
+
+      clearInterval(countdownInterval);
       return;
     }
 
@@ -151,7 +158,7 @@ function startCountdown() {
   }
 
   update();
-  setInterval(update, 1000);
+  countdownInterval = setInterval(update, 1000);
 }
 
 // ======================
