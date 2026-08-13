@@ -355,27 +355,16 @@ function toast(msg) {
 /* ============================================================
    ADD TO CALENDAR (.ics)
    ============================================================ */
-function addToCalendar() {
-  const ics = [
-    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Undangan Gunawan Chafifah//ID',
-    'BEGIN:VEVENT',
-    'DTSTART:20260914T010000Z',
-    'DTEND:20260914T050000Z',
-    'SUMMARY:Akad & Resepsi Pernikahan Gunawan & Chafifah',
-    'LOCATION:Dukuh Kalimeneng, Desa Girigondo, Kec. Pituruh, Kab. Purworejo',
-    'DESCRIPTION:Akad Nikah 08.00 WIB, Resepsi 10.00 WIB',
-    'END:VEVENT', 'END:VCALENDAR'
-  ].join('\r\n');
- 
-  const blob = new Blob([ics], { type: 'text/calendar' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'Undangan-Gunawan-Chafifah.ics';
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
- 
-  toast('Acara ditambahkan, cek file kalender 📅');
+function addToGoogleCalendar() {
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: 'Pernikahan Gunawan & Chafifah',
+    dates: '20260914T010000Z/20260914T050000Z',
+    details: 'Akad Nikah 08.00 WIB, Resepsi 10.00 WIB',
+    location: 'Dukuh Kalimeneng, Desa Girigondo, Kec. Pituruh, Kab. Purworejo'
+  });
+
+  window.open(`https://calendar.google.com/calendar/render?${params.toString()}`, '_blank');
 }
 
 // ======================
