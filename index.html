@@ -141,43 +141,38 @@
       <span class="section-tag reveal">Acara</span>
       <h2 class="section-title reveal">Detail Acara</h2>
       <div class="gold-line reveal"></div>
-      <div class="event-wrapper reveal">
-        <!-- AKAD -->
-        <div class="event-side">
-          <h3 class="event-name">Akad Nikah</h3>
-          <div class="event-time">08.00 WIB</div>
+      <div class="card-background">
+        <div class="event-wrapper reveal">
+          <!-- AKAD -->
+          <div class="event-side">
+            <h3 class="event-name">Akad Nikah</h3>
+            <div class="event-time">08.00 WIB</div>
+          </div>
+          <!-- TANGGAL -->
+          <div class="event-center">
+            <div class="event-day">SENIN</div>
+            <div class="event-number">14</div>
+            <div class="event-month">SEPTEMBER 2026</div>
+          </div>
+          <!-- RESEPSI -->
+          <div class="event-side">
+            <h3 class="event-name">Resepsi</h3>
+            <div class="event-time">10.00 WIB</div>
+          </div>
         </div>
-        <!-- TANGGAL -->
-        <div class="event-center">
-          <div class="event-day">SENIN</div>
-          <div class="event-number">14</div>
-          <div class="event-month">SEPTEMBER 2026</div>
-        </div>
-        <!-- RESEPSI -->
-        <div class="event-side">
-          <h3 class="event-name">Resepsi</h3>
-          <div class="event-time">10.00 WIB</div>
-        </div>
+        <div class="event-location-shared reveal">
+          <div class="location-divider"><span></span></div>
+          <div class="location-label">Lokasi Acara</div>
+          <div class="location-text">
+            Dukuh Kalimeneng, Desa Girigondo,<br>
+            Kec. Pituruh, Kab. Purworejo
+          </div>
       </div>
-
-      <div class="event-location-shared reveal">
-        <div class="location-divider"><span></span></div>
-        <div class="location-label">Lokasi Acara</div>
-        <div class="location-text">
-          Dukuh Kalimeneng, Desa Girigondo,<br>
-          Kec. Pituruh, Kab. Purworejo
-        </div>
       </div>
-      <div class="btn-row reveal">
         <a href="https://maps.app.goo.gl/DvpVC3LbrgQKep187" target="_blank" class="maps-btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M19.5 10.5c0 7.5-7.5 11.25-7.5 11.25S4.5 18 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
           Buka di Maps
         </a>
-        <button class="btn-outline" onclick="addToCalendar()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0V11.25A2.25 2.25 0 015.25 9h13.5a2.25 2.25 0 012.25 2.25v7.5"/></svg>
-          Tambah ke Kalender
-        </button>
-      </div>
     </section>
   </div>
 
@@ -205,6 +200,12 @@
           <span class="count-num" id="cd-detik">--</span>
           <span class="count-label">Detik</span>
         </div>
+      </div>
+      <div class="save-date reveal">
+        <button class="btn-outline" onclick="addToGoogleCalendar()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0V11.25A2.25 2.25 0 015.25 9h13.5a2.25 2.25 0 012.25 2.25v7.5"/></svg>
+          Tambah ke Kalender
+        </button>
       </div>
     </section>
   </div>
@@ -298,13 +299,15 @@
       <span class="section-tag reveal">Penutup</span>
       <h2 class="section-title reveal">Terima Kasih</h2>
       <div class="gold-line reveal"></div>
-      <p class="section-body reveal">
-        Kami berharap kehadiran Bapak/Ibu/Saudara/i dapat menjadi bagian dari kebahagiaan kami. Terima kasih atas doa dan restu yang diberikan untuk mengiringi langkah awal kami.
-      </p>
-      <p class="closing-arabic reveal" style="transition-delay:0.2s">وَالسَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
-      <div class="gold-line reveal" style="transition-delay:0.3s"></div>
-      <div class="cover-names reveal" style="transition-delay:0.4s;font-size:2rem;color:var(--gold-light)">
-        Gunawan <span style="font-style:italic;color:var(--gold);font-size:0.6em;margin:0 8px">&amp;</span> Chafifah
+      <div class="card-background reveal">
+        <p class="section-body reveal">
+          Kami berharap kehadiran Bapak/Ibu/Saudara/i dapat menjadi bagian dari kebahagiaan kami. Terima kasih atas doa dan restu yang diberikan untuk mengiringi langkah awal kami.
+        </p>
+        <p class="closing-arabic reveal" style="transition-delay:0.2s">وَالسَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
+        <div class="gold-line reveal" style="transition-delay:0.3s"></div>
+        <div class="cover-names reveal" style="transition-delay:0.4s;font-size:2rem;color:var(--gold-light)">
+          Gunawan <span style="font-style:italic;color:var(--gold);font-size:0.6em;margin:0 8px">&amp;</span> Chafifah
+        </div>
       </div>
     </section>
   </div>
